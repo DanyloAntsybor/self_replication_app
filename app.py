@@ -31,6 +31,7 @@ github = oauth.remote_app(
 FILES = [
 'app.py',
 'README.md',
+'instructions.md',
 'templates/index.html',
 'templates/status.html',
 'requirements.txt',
@@ -75,14 +76,6 @@ def index():
 @app.route('/login')
 def login():
     return github.authorize(callback=url_for('authorized', _external=True))
-
-
-@app.route('/logout')
-def logout():
-    session.pop('github_token', None)
-    session.pop('username', None)
-    session.clear()
-    return redirect(url_for('index'))
 
 
 @app.route('/login/authorized')
